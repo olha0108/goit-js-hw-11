@@ -95,10 +95,10 @@ function alertImagesFound(data) {
   Notify.success(`Hooray! We found ${data.totalHits} images.`);
 }
 const btnLoadMore = document.querySelector('.load-more');
-btnLoadMore.addEventListener('click', addEltoGallery);
+btnLoadMore.addEventListener('click', addPhototoGallery);
 btnLoadMore.disabled = true;
 
-async function addEltoGallery(submitValue) {
+async function addPhototoGallery(submitValue) {
   page += 1;
   try {
     if (Math.ceil(pages) >= page) {
