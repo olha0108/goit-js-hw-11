@@ -67,6 +67,7 @@ function onSubmit(e) {
     return;
   } else {
     searchResult(submitValue);
+    btnLoadMore.style.opacity = '1';
     btnLoadMore.disabled = false;
   }
 }
@@ -96,7 +97,7 @@ function alertImagesFound(data) {
 const btnLoadMore = document.querySelector('.load-more');
 
 btnLoadMore.addEventListener('click', addEltoGallery);
-btnLoadMore.disabled = true;
+btnLoadMore.style.opacity = '0';
 
 async function addEltoGallery(submitValue) {
   page += 1;
@@ -104,6 +105,7 @@ async function addEltoGallery(submitValue) {
     if (Math.ceil(pages) >= page) {
       const respons = await fetchPhoto(input.value, page);
       addPhotoToGallery(respons.data.hits);
+
       btnLoadMore.disabled = false;
     } else {
       Notify.warning(
