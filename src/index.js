@@ -18,9 +18,6 @@ const parameters = {
   per_page: 40,
 };
 
-let page = 1;
-let pages = 0;
-
 const fetchPhoto = async (q, page) => {
   try {
     const response = await axios.get(
@@ -32,7 +29,11 @@ const fetchPhoto = async (q, page) => {
   }
 };
 
+let page = 1;
+let pages = 0;
+
 const galleryEl = document.querySelector('.gallery');
+let simpleLightbox = '';
 
 function createMarkupForCard(items) {
   galleryEl.innerHTML = ' ';
@@ -65,14 +66,12 @@ function onSubmit(e) {
   if (submitValue === '') {
     return;
   } else {
-    serchResult(submitValue);
+    searchResult(submitValue);
     btnLoadMore.disabled = false;
   }
 }
 
-
-
-const serchResult = async submitValue => {
+const searchResult = async submitValue => {
   page = 1;
   try {
     const respons = await fetchPhoto(submitValue, page);
@@ -85,7 +84,7 @@ const serchResult = async submitValue => {
     } else createMarkupForCard(respons.data.hits);
     alertImagesFound(respons.data);
 
-    pages = respons.data.totalHits;
+    pages = respons.data.totalHits / 40;
   } catch (error) {
     console.log(error.message);
   }
@@ -95,10 +94,11 @@ function alertImagesFound(data) {
   Notify.success(`Hooray! We found ${data.totalHits} images.`);
 }
 const btnLoadMore = document.querySelector('.load-more');
-btnLoadMore.addEventListener('click', addPhototoGallery);
+
+btnLoadMore.addEventListener('click', addEltoGallery);
 btnLoadMore.disabled = true;
 
-async function addPhototoGallery(submitValue) {
+async function addEltoGallery(submitValue) {
   page += 1;
   try {
     if (Math.ceil(pages) >= page) {
