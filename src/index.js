@@ -18,6 +18,9 @@ const parameters = {
   per_page: 40,
 };
 
+let page = 1;
+let pages = 0;
+
 const fetchPhoto = async (q, page) => {
   try {
     const response = await axios.get(
@@ -62,15 +65,14 @@ function onSubmit(e) {
   if (submitValue === '') {
     return;
   } else {
-    doMagic(submitValue);
+    serchResult(submitValue);
     btnLoadMore.disabled = false;
   }
 }
 
-let page = 1;
-let pages = 0;
 
-const doMagic = async submitValue => {
+
+const serchResult = async submitValue => {
   page = 1;
   try {
     const respons = await fetchPhoto(submitValue, page);
