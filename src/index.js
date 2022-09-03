@@ -67,6 +67,9 @@ function onSubmit(e) {
   }
 }
 
+let page = 1;
+let pages = 0;
+
 const doMagic = async submitValue => {
   page = 1;
   try {
