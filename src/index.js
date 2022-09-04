@@ -33,7 +33,7 @@ let page = 1;
 let pages = 0;
 
 const galleryEl = document.querySelector('.gallery');
-let simpleLightbox = '';
+const simpleLightbox = new SimpleLightbox('.gallery a');
 
 function createMarkupForCard(items) {
   galleryEl.innerHTML = ' ';
@@ -44,11 +44,10 @@ function createMarkupForCard(items) {
     )
     .join(``);
   galleryEl.insertAdjacentHTML('beforeend', markupForCard);
-  simpleLightbox = new SimpleLightbox('.gallery a').refresh();
+  simpleLightbox.refresh();
 }
 
 function addPhotoToGallery(items) {
-  simpleLightbox.destroy();
   const markupForCard = items
     .map(
       item =>
@@ -56,7 +55,7 @@ function addPhotoToGallery(items) {
     )
     .join(``);
   galleryEl.insertAdjacentHTML('beforeend', markupForCard);
-  simpleLightbox = new SimpleLightbox('.gallery a').refresh();
+  simpleLightbox.refresh();
 }
 
 function onSubmit(e) {
@@ -112,6 +111,7 @@ async function addEltoGallery(submitValue) {
         "We're sorry, but you've reached the end of search results."
       );
       btnLoadMore.disabled = true;
+      btnLoadMore.style.opacity = '0';
     }
   } catch (error) {
     console.log(error.message);
