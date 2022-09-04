@@ -85,6 +85,7 @@ const searchResult = async submitValue => {
         'Sorry, there are no images matching your search query. Please try again.'
       );
       btnLoadMore.disabled = true;
+      btnLoadMore.style.opacity = '0';
       return;
     } else createMarkupForCard(respons.data.hits);
     alertImagesFound(respons.data);
