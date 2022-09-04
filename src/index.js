@@ -66,7 +66,7 @@ function onSubmit(e) {
   e.preventDefault();
   clearArticlesContainer();
   btnSubmit.disabled = true;
-  const submitValue = e.currentTarget.searchQuery.value;
+  const submitValue = e.currentTarget.searchQuery.value.trim();
   if (submitValue === '') {
     return;
   } else {
