@@ -35,6 +35,10 @@ let pages = 0;
 const galleryEl = document.querySelector('.gallery');
 const simpleLightbox = new SimpleLightbox('.gallery a');
 
+function clearArticlesContainer() {
+  galleryEl.innerHTML = '';
+}
+
 function createMarkupForCard(items) {
   galleryEl.innerHTML = ' ';
   const markupForCard = items
@@ -60,6 +64,7 @@ function addPhotoToGallery(items) {
 
 function onSubmit(e) {
   e.preventDefault();
+  clearArticlesContainer();
   btnSubmit.disabled = true;
   const submitValue = e.currentTarget.searchQuery.value;
   if (submitValue === '') {
